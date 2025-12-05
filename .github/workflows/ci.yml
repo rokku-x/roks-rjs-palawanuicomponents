@@ -17,10 +17,20 @@ jobs:
       - name: Setup Node.js
         uses: actions/setup-node@v4
         with:
-          node-version: '18'
+          node-version: '20'
 
       - name: Install dependencies
-        run: npm ci
+        run: npm install
+
+      - name: Install rollup binary
+        run: npm install @rollup/rollup-linux-x64-gnu
+
+      - name: Run tests
+        run: npm test -- --run
+        env:
+          ROLLUP_SKIP_NATIVE: true
 
       - name: Build
         run: npm run build
+        env:
+          ROLLUP_SKIP_NATIVE: true

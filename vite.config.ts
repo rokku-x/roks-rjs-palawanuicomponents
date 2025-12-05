@@ -14,8 +14,13 @@ export default defineConfig({
     build: {
         lib: {
             entry: 'src/index.ts',
+            formats: ['es', 'cjs', 'umd'],
             name: 'roks-rjs-palawanuicomponents',
-            fileName: (format) => `index.${format}.js`
+            fileName: (format) => {
+                if (format === 'es') return 'index.esm.js'
+                if (format === 'cjs') return 'index.js'
+                return 'index.umd.js'
+            }
         },
         rollupOptions: {
             external: ['react', 'react-dom'],
