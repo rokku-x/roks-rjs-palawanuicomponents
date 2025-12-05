@@ -1,6 +1,6 @@
 {
   "name": "roks-rjs-palawanuicomponents",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "A React component library",
   "main": "dist/index.js",
   "module": "dist/index.esm.js",
@@ -25,8 +25,8 @@
     "test:ui": "vitest --ui"
   },
   "peerDependencies": {
-    "react": "^18.0.0",
-    "react-dom": "^18.0.0"
+    "react": ">=17.0.0",
+    "react-dom": ">=17.0.0"
   },
   "devDependencies": {
     "@testing-library/jest-dom": "^6.9.1",

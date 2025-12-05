@@ -2,6 +2,11 @@
 
 A React component library.
 
+## Requirements
+
+- React >= 17.0.0
+- React DOM >= 17.0.0
+
 ## Installation
 
 npm install roks-rjs-palawanuicomponents
