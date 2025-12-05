@@ -5,7 +5,8 @@ import dts from 'vite-plugin-dts'
 export default defineConfig({
     plugins: [
         react({
-            jsxRuntime: 'classic' // Use classic JSX runtime for libraries
+            jsxRuntime: 'automatic',
+            jsxImportSource: 'react'
         }),
         dts({
             include: ['src/**/*'],
