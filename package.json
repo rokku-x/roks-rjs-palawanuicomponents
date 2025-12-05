@@ -29,5 +29,9 @@
     "library"
   ],
   "author": "rokku",
-  "license": "MIT"
+  "license": "MIT",
+  "publishConfig": {
+    "access": "public",
+    "provenance": true
+  }
 }
