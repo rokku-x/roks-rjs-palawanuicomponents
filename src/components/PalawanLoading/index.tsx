@@ -1,40 +1,91 @@
-"use client";
 import "./index.css";
 import type React from "react";
 
-export default function PalawanLoading({ size, isGreen, speed, glow = true, hasShadow = false, stopSpin = false }: { size?: string | number, isGreen?: boolean, speed?: number, glow?: boolean, hasShadow?: boolean, stopSpin?: boolean }) {
+function PalawanCircle({ cx, cy, r, strokeWidth, stroke, fill = "none" }: { cx: number, cy: number, r: number, strokeWidth: number, stroke: string, fill?: string }) {
+    return (
+        <circle cx={cx} cy={cy} r={r} stroke={stroke} strokeWidth={strokeWidth} fill={fill} />
+    );
+}
 
-    const svgClass = `${glow ? "has-glow" : ""} ${hasShadow ? "has-shadow" : ""} ${stopSpin ? "stop-spin" : ""} ${isGreen ? "pgc-green" : "pgc-gold"}`;
+function PalawanCirclePath({ d, strokeWidth, stroke, fill = "none" }: { d: string, strokeWidth: number, stroke: string, fill?: string }) {
+    return (
+        <path className="star-seg" pathLength="1000" d={d} stroke={stroke} strokeWidth={strokeWidth} fill={fill} />
+    );
+}
+
+function PalawanStarPath({ d, strokeWidth, stroke, fill = "none" }: { d: string, strokeWidth: number, stroke: string, fill?: string }) {
+    return (
+        <path className="star-seg" pathLength="1000" d={d} stroke={stroke} strokeWidth={strokeWidth} fill={fill} strokeLinejoin="round" strokeLinecap="round" />
+    );
+}
+
+const ringA = [
+    { cx: 200.00, cy: -40.38, r: 166.86, strokeWidth: 16.34, stroke: "url(#gradientWarm)" },
+    { cx: 200.00, cy: 440.38, r: 166.86, strokeWidth: 16.34, stroke: "url(#gradientWarm)" }
+]
+
+const ringAA = [
+    { cx: 200.00, cy: -40.38, r: 166.86, strokeWidth: 16.34, stroke: "url(#gradientWarm)" },
+    { cx: 200.00, cy: 440.38, r: 166.86, strokeWidth: 16.34, stroke: "url(#gradientSoft)" }
+]
+
+const ringB = [
+    { cx: -40.38, cy: 200.00, r: 166.86, strokeWidth: 16.34, stroke: "url(#gradientSoft)" },
+    { cx: 440.38, cy: 200.00, r: 166.86, strokeWidth: 16.34, stroke: "url(#gradientSoft)" }
+];
+
+const ringBA = [
+    { cx: -40.38, cy: 200.00, r: 166.86, strokeWidth: 16.34, stroke: "url(#gradientSoft)" },
+    { cx: 440.38, cy: 200.00, r: 166.86, strokeWidth: 16.34, stroke: "url(#gradientWarm)" }
+];
+
+const ringPathAA = [
+    { d: "M 76.49, 328.14 A 166.86, 166.86 0 0 1 323.51, 328.14", strokeWidth: 16.34, stroke: "url(#gradientWarm)" },
+    { d: "M 323.51, 71.86 A 166.86, 166.86 0 0 1 76.49, 71.86", strokeWidth: 16.34, stroke: "url(#gradientWarm)" }
+];
+
+const ringPathAB = [
+    { d: "M 76.49, 328.14 A 166.86, 166.86 0 0 1 323.51, 328.14", strokeWidth: 16.34, stroke: "url(#gradientSoft)" },
+    { d: "M 323.51, 71.86 A 166.86, 166.86 0 0 1 76.49, 71.86", strokeWidth: 16.34, stroke: "url(#gradientWarm)" }
+];
+
+const ringPathBA = [
+    { d: "M 76.49, 328.14 A 166.86, 166.86 0 0 1 323.51, 328.14", strokeWidth: 16.34, stroke: "url(#gradientWarm)" },
+    { d: "M 323.51, 71.86 A 166.86, 166.86 0 0 1 76.49, 71.86", strokeWidth: 16.34, stroke: "url(#gradientSoft)" }
+];
+
+const ringPathBB = [
+    { d: "M 76.49, 328.14 A 166.86, 166.86 0 0 1 323.51, 328.14", strokeWidth: 16.34, stroke: "url(#gradientSoft)" },
+    { d: "M 323.51, 71.86 A 166.86, 166.86 0 0 1 76.49, 71.86", strokeWidth: 16.34, stroke: "url(#gradientSoft)" }
+];
+
+const starPaths = [
+    { d: "M200.000,33.159 L247.018,84.341 L317.078,81.988", strokeWidth: 16.34, stroke: "url(#goldGradStar)" },
+    { d: "M317.078,81.988 L314.664,151.050 L366.027,200.000", strokeWidth: 16.34, stroke: "url(#goldGradStar)" },
+    { d: "M366.027,200.000 L314.664,248.950 L317.078,317.912", strokeWidth: 16.34, stroke: "url(#goldGradStar)" },
+    { d: "M317.078,317.912 L247.018,315.559 L200.000,366.841", strokeWidth: 16.34, stroke: "url(#goldGradStar)" },
+    { d: "M200.000,366.841 L152.982,315.559 L82.922,317.912", strokeWidth: 16.34, stroke: "url(#goldGradStar)" },
+    { d: "M82.922,317.912 L85.336,248.950 L33.973,200.000", strokeWidth: 16.34, stroke: "url(#goldGradStar)" },
+    { d: "M33.973,200.000 L85.336,151.050 L82.922,81.988", strokeWidth: 16.34, stroke: "url(#goldGradStar)" },
+    { d: "M82.922,81.988 L152.982,84.341 L200.000,33.159", strokeWidth: 16.34, stroke: "url(#goldGradStar)" }
+];
+
+export default function PalawanLoading({ className, style, size = 100, isGreen = false, speed = 1, hasGlow = true, hasShadow = true, stopSpin = false, stopStarAnim = false, useRawCircleElements = false }: {
+    style?: React.CSSProperties, className?: string, size?: string | number, isGreen?: boolean, speed?: number, hasGlow?: boolean, hasShadow?: boolean, stopSpin?: boolean, stopStarAnim?: boolean, useRawCircleElements?: boolean
+}) {
+
+    const svgClass = `${hasGlow ? "has-glow" : ""} ${hasShadow ? "has-shadow" : ""} ${stopSpin ? "stop-spin" : ""} ${isGreen ? "pgc-green" : "pgc-gold"}`;
     const mainRingClass = `pgc-main-ring ${stopSpin ? "" : "rot-mid"}`;
     const ringsBClass = `pgc-ring-b ${stopSpin ? "" : "rot-slow"}`;
     const ringsAClass = `pgc-ring-a ${stopSpin ? "" : "rot-fast"}`;
-    const starPathsClass = `pgc-star-paths ${stopSpin ? "" : "rot-mid"}`;
+    const starPathsClass = `pgc-star-paths ${stopSpin ? "" : "rot-mid"} ${stopStarAnim ? "" : "star-seg-anim"}`;
 
     return (
-        <div className="pgc-loading-container" style={{ maxWidth: size, width: "100%", "--pgc-speed-multiplier": speed ? speed : 1 } as React.CSSProperties}>
+        <div className={`pgc-loading-container ${className ? className : ""}`} style={{ minWidth: size, maxWidth: size, width: "100%", "--pgc-speed-multiplier": speed ? speed : 1, ...style } as React.CSSProperties}>
             <svg className={svgClass} viewBox="0 0 400 400" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"
                 preserveAspectRatio="xMidYMid meet" style={{ overflow: "visible" }}>
                 <defs>
-                    <clipPath id="clipInner">
-                        <circle cx="200.00" cy="200.00" r="175" />
-                    </clipPath>
-
-                    <filter id="softBlur" x="-50%" y="-50%" width="200%" height="200%">
-                        <feGaussianBlur stdDeviation="4.5" result="b" />
-                        <feComposite in="b" in2="SourceGraphic" operator="over" />
-                    </filter>
-
-                    <filter id="insetShadow" x="-50%" y="-50%" width="200%" height="200%">
-                        <feGaussianBlur in="SourceAlpha" stdDeviation="2.5" result="blur" />
-                        <feOffset in="blur" dx="0" dy="1.5" result="off" />
-                        <feComposite in="off" in2="SourceAlpha" operator="arithmetic" k2="-1" k3="1" result="inner" />
-                        <feColorMatrix in="inner" type="matrix" values="0 0 0 0 0.0  0 0 0 0 0.0  0 0 0 0 0.0  0 0 0 0.6" />
-                        <feMerge>
-                            <feMergeNode in="inner" />
-                            <feMergeNode in="SourceGraphic" />
-                        </feMerge>
-                    </filter>
-
+                    {useRawCircleElements && <clipPath id="clipInner"><circle cx="200.00" cy="200.00" r="175" /></clipPath>}
                     <linearGradient id="goldGradStar" x1="0%" y1="0%" x2="100%" y2="100%">
                         <stop offset="0%" stopColor={"rgb(var(--pgc-bright-rgb))"} />
                         <stop offset="45%" stopColor={`rgb(var(--pgc-base-rgb))`} />
@@ -53,39 +104,27 @@ export default function PalawanLoading({ size, isGreen, speed, glow = true, hasS
 
                 </defs>
 
-                <g clip-path="url(#clipInner)" id="clipGroup" className="breath">
+                <g clipPath="url(#clipInner)" id="clipGroup" className="breath">
                     <g id="ringsA" className={ringsAClass}>
-                        <circle cx="200.00" cy="-40.38" r="166.86" stroke="url(#gradientWarm)" stroke-width="16.34" fill="none" />
-                        <circle cx="200.00" cy="440.38" r="166.86" stroke="url(#gradientWarm)" stroke-width="16.34" fill="none" />
-                        <g transform="rotate(45 200.00 200.00)" opacity=".5">
-                            <circle cx="200.00" cy="-40.38" r="166.86" stroke="url(#gradientWarm)" stroke-width="16.34" fill="none" />
-                            <circle cx="200.00" cy="440.38" r="166.86" stroke="url(#gradientSoft)" stroke-width="16.34" fill="none" />
-                        </g>
-
+                        {useRawCircleElements && ringA.map((ring, index) => <PalawanCircle key={index} {...ring} />)}
+                        {useRawCircleElements && <g transform="rotate(45 200.00 200.00)" opacity=".5">{ringAA.map((ring, index) => <PalawanCircle key={index} {...ring} />)}</g>}
+                        {!useRawCircleElements && <g >{ringPathAA.map((ring, index) => <PalawanCirclePath key={index} {...ring} />)}</g >}
+                        {!useRawCircleElements && <g transform="rotate(45 200.00 200.00)" opacity=".5">{ringPathAB.map((ring, index) => <PalawanCirclePath key={index} {...ring} />)}</g>}
                     </g>
 
-                    <g id="starPaths" className={starPathsClass} transform="rotate(22.5 200.00 200.00)" fill="none" stroke="url(#goldGradStar)" stroke-width="16.34"
-                        stroke-linejoin="round" stroke-linecap="round">
-                        <path className="star-seg" pathLength="1000" d="M200.000,33.159 L247.018,84.341 L317.078,81.988" />
-                        <path className="star-seg" pathLength="1000" d="M317.078,81.988 L314.664,151.050 L366.027,200.000" />
-                        <path className="star-seg" pathLength="1000" d="M366.027,200.000 L314.664,248.950 L317.078,317.912" />
-                        <path className="star-seg" pathLength="1000" d="M317.078,317.912 L247.018,315.559 L200.000,366.841" />
-                        <path className="star-seg" pathLength="1000" d="M200.000,366.841 L152.982,315.559 L82.922,317.912" />
-                        <path className="star-seg" pathLength="1000" d="M82.922,317.912 L85.336,248.950 L33.973,200.000" />
-                        <path className="star-seg" pathLength="1000" d="M33.973,200.000 L85.336,151.050 L82.922,81.988" />
-                        <path className="star-seg" pathLength="1000" d="M82.922,81.988 L152.982,84.341 L200.000,33.159" />
+                    <g id="starPaths" className={starPathsClass} transform="rotate(22.5 200.00 200.00)" fill="none" stroke="url(#goldGradStar)" strokeWidth="16.34"
+                        strokeLinejoin="round" strokeLinecap="round">
+                        {starPaths.map((path, index) => <PalawanStarPath key={index} {...path} />)}
                     </g>
 
                     <g id="ringsB" className={ringsBClass}>
-                        <circle cx="-40.38" cy="200.00" r="166.86" stroke="url(#gradientSoft)" stroke-width="16.34" fill="none" />
-                        <circle cx="440.38" cy="200.00" r="166.86" stroke="url(#gradientSoft)" stroke-width="16.34" fill="none" />
-                        <g transform="rotate(45 200.00 200.00)" opacity=".5">
-                            <circle cx="-40.38" cy="200.00" r="166.86" stroke="url(#gradientSoft)" stroke-width="16.34" fill="none" />
-                            <circle cx="440.38" cy="200.00" r="166.86" stroke="url(#gradientWarm)" stroke-width="16.34" fill="none" />
-                        </g>
+                        {useRawCircleElements && ringB.map((ring, index) => <PalawanCircle key={index} {...ring} />)}
+                        {useRawCircleElements && <g transform="rotate(45 200.00 200.00)">{ringBA.map((ring, index) => <PalawanCircle key={index} {...ring} />)}</g>}
+                        {!useRawCircleElements && <g transform="rotate(90 200.00 200.00)" >{ringPathBA.map((ring, index) => <PalawanCirclePath key={index} {...ring} />)}</g >}
+                        {!useRawCircleElements && <g transform="rotate(135 200.00 200.00)" opacity=".5">{ringPathBA.map((ring, index) => <PalawanCirclePath key={index} {...ring} />)}</g>}
                     </g>
                 </g>
-                <circle id="mainRing" cx="200.00" cy="200.00" r="185" stroke="url(#gradientWarm)" stroke-width="32.67" fill="none" className={mainRingClass} />
+                <circle id="mainRing" cx="200.00" cy="200.00" r="185" stroke="url(#gradientWarm)" strokeWidth="32.67" fill="none" className={mainRingClass} />
             </svg>
         </div>
     )

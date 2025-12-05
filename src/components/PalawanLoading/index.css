@@ -1,189 +1,187 @@
- .pgc-loading-container {
-     aspect-ratio: 1/1;
-     width: min(90vmin, 1100px);
-     height: auto
- }
+@keyframes glowPulse {
+    0% {
+        filter: drop-shadow(0 0 25px rgba(152, 152, 152, 0.3)) drop-shadow(0 0 10px rgba(150, 150, 150, 0.2))
+    }
 
- @keyframes glowPulse {
-     0% {
-         filter: drop-shadow(0 0 25px rgba(152, 152, 152, 0.3)) drop-shadow(0 0 10px rgba(150, 150, 150, 0.2))
-     }
+    50% {
+        filter: drop-shadow(0 0 25px rgba(var(--gold-base-rgb), 0.5)) drop-shadow(0 0 25px rgba(var(--gold-base-rgb), .3))
+    }
 
-     50% {
-         filter: drop-shadow(0 0 25px rgba(var(--gold-base-rgb), 0.5)) drop-shadow(0 0 10px rgba(var(--gold-base-rgb), 0.3))
-     }
-
-     100% {
-         filter: drop-shadow(0 0 25px rgba(152, 152, 152, 0.3)) drop-shadow(0 0 10px rgba(150, 150, 150, 0.2))
-     }
- }
+    100% {
+        filter: drop-shadow(0 0 25px rgba(152, 152, 152, 0.3)) drop-shadow(0 0 10px rgba(150, 150, 150, 0.2))
+    }
+}
 
 
 
- @keyframes greenGlowPulse {
-     0% {
-         filter: drop-shadow(0 0 18px rgba(55, 55, 55, 0.3)) drop-shadow(0 0 6px rgba(55, 55, 55, 0.2))
-     }
+@keyframes greenGlowPulse {
+    0% {
+        filter: drop-shadow(0 0 25px rgba(55, 55, 55, 0.3)) drop-shadow(0 0 6px rgba(55, 55, 55, 0.2))
+    }
 
-     50% {
-         filter: drop-shadow(0 0 54px rgba(var(--green-base-rgb), 0.5)) drop-shadow(0 0 20px rgba(var(--green-base-rgb), 0.3))
-     }
+    50% {
+        filter: drop-shadow(0 0 25px rgba(var(--green-base-rgb), 0.5)) drop-shadow(0 0 25px rgba(var(--green-base-rgb), 0.3))
+    }
 
-     100% {
-         filter: drop-shadow(0 0 18px rgba(55, 55, 55, 0.3)) drop-shadow(0 0 6px rgba(55, 55, 55, 0.2))
-     }
- }
-
-
- :root {
-     --gold-bright-rgb: 254, 233, 97;
-     --gold-base-rgb: 255, 215, 0;
-     --gold-warm-rgb: 255, 179, 0;
-     --gold-deep-rgb: 196, 141, 0;
-     --gold-soft-rgb: 255, 218, 122;
-     --green-bright-rgb: 96, 224, 115;
-     --green-base-rgb: 53, 112, 63;
-     --green-warm-rgb: 42, 90, 50;
-     --green-deep-rgb: 31, 56, 36;
-     --green-soft-rgb: 90, 148, 103;
-     --pgc-bright-rgb: var(--gold-bright-rgb);
-     --pgc-base-rgb: var(--gold-base-rgb);
-     --pgc-warm-rgb: var(--gold-warm-rgb);
-     --pgc-soft-rgb: var(--gold-soft-rgb);
-     --pgc-deep-rgb: var(--gold-deep-rgb);
-     --pgc-speed-multiplier: 1;
- }
-
- /* theme mapping based on parent svg class */
- svg.pgc-gold {
-     --pgc-bright-rgb: var(--gold-bright-rgb);
-     --pgc-base-rgb: var(--gold-base-rgb);
-     --pgc-warm-rgb: var(--gold-warm-rgb);
-     --pgc-soft-rgb: var(--gold-soft-rgb);
-     --pgc-deep-rgb: var(--gold-deep-rgb);
- }
-
- svg.pgc-green {
-     --pgc-bright-rgb: var(--green-bright-rgb);
-     --pgc-base-rgb: var(--green-base-rgb);
-     --pgc-warm-rgb: var(--green-warm-rgb);
-     --pgc-soft-rgb: var(--green-soft-rgb);
-     --pgc-deep-rgb: var(--green-deep-rgb);
- }
-
- /* glow behavior decided purely by CSS + theme class */
- svg.pgc-gold.has-glow {
-     filter: drop-shadow(0 0 3px rgb(var(--gold-base-rgb))) drop-shadow(0 0 3px rgb(var(--gold-base-rgb)));
-     animation: glowPulse 1s ease-in-out infinite;
- }
-
- svg.pgc-green.has-glow {
-     filter: drop-shadow(0 0 3px rgb(var(--green-base-rgb))) drop-shadow(0 0 3px rgb(var(--green-base-rgb)));
-     animation: greenGlowPulse 1s ease-in-out infinite;
- }
-
- svg.has-shadow .pgc-main-ring,
- svg.has-shadow .pgc-ring-a,
- svg.has-shadow .pgc-ring-b,
- svg.has-shadow .pgc-star-paths {
-     filter: drop-shadow(0 0 3px rgba(var(--pgc-warm-rgb), .7)) drop-shadow(0 0 3px rgba(var(--pgc-deep-rgb), .7));
- }
+    100% {
+        filter: drop-shadow(0 0 25px rgba(55, 55, 55, 0.3)) drop-shadow(0 0 6px rgba(55, 55, 55, 0.2))
+    }
+}
 
 
- .rot-slow {
-     animation: spin calc(50s / var(--pgc-speed-multiplier)) linear infinite;
-     transform-box: fill-box;
-     transform-origin: center
- }
+:root {
+    --gold-bright-rgb: 254, 233, 97;
+    --gold-base-rgb: 255, 215, 0;
+    --gold-warm-rgb: 255, 179, 0;
+    --gold-deep-rgb: 196, 141, 0;
+    --gold-soft-rgb: 255, 218, 122;
+    --green-bright-rgb: 96, 224, 115;
+    --green-base-rgb: 53, 112, 63;
+    --green-warm-rgb: 42, 90, 50;
+    --green-deep-rgb: 31, 56, 36;
+    --green-soft-rgb: 90, 148, 103;
+    --pgc-bright-rgb: var(--gold-bright-rgb);
+    --pgc-base-rgb: var(--gold-base-rgb);
+    --pgc-warm-rgb: var(--gold-warm-rgb);
+    --pgc-soft-rgb: var(--gold-soft-rgb);
+    --pgc-deep-rgb: var(--gold-deep-rgb);
+    --pgc-speed-multiplier: 1;
+}
 
- .rot-mid {
-     animation: spin calc(27s / var(--pgc-speed-multiplier)) linear infinite reverse;
-     transform-box: fill-box;
-     transform-origin: center
- }
+/* theme mapping based on parent svg class */
+svg.pgc-gold {
+    --pgc-bright-rgb: var(--gold-bright-rgb);
+    --pgc-base-rgb: var(--gold-base-rgb);
+    --pgc-warm-rgb: var(--gold-warm-rgb);
+    --pgc-soft-rgb: var(--gold-soft-rgb);
+    --pgc-deep-rgb: var(--gold-deep-rgb);
+}
 
- .rot-fast {
-     animation: spin calc(6.5s / var(--pgc-speed-multiplier)) linear infinite;
-     transform-box: fill-box;
-     transform-origin: center
- }
+svg.pgc-green {
+    --pgc-bright-rgb: var(--green-bright-rgb);
+    --pgc-base-rgb: var(--green-base-rgb);
+    --pgc-warm-rgb: var(--green-warm-rgb);
+    --pgc-soft-rgb: var(--green-soft-rgb);
+    --pgc-deep-rgb: var(--green-deep-rgb);
+}
 
- @keyframes spin {
-     from {
-         transform: rotate(0deg)
-     }
+/* glow behavior decided purely by CSS + theme class */
+svg.pgc-gold.has-glow {
+    filter: drop-shadow(0 0 3px rgb(var(--gold-base-rgb))) drop-shadow(0 0 3px rgb(var(--gold-base-rgb)));
+    animation: glowPulse calc(1s / var(--pgc-speed-multiplier)) ease-in-out infinite;
+}
 
-     to {
-         transform: rotate(360deg)
-     }
- }
+svg.pgc-green.has-glow {
+    filter: drop-shadow(0 0 3px rgb(var(--green-base-rgb))) drop-shadow(0 0 3px rgb(var(--green-base-rgb)));
+    animation: greenGlowPulse calc(1s / var(--pgc-speed-multiplier)) ease-in-out infinite;
+}
 
- /* .breath{animation:breath 2200ms ease-in-out infinite} */
- /* @keyframes breath{0%{transform:scale(0.997)}50%{transform:scale(1.003)}100%{transform:scale(0.997)}} */
- /* allow strokes to scale so the whole artwork scales evenly */
- /* polygon, circle, path{vector-effect:non-scaling-stroke} */
+svg.has-shadow .pgc-main-ring,
+svg.has-shadow .pgc-ring-a,
+svg.has-shadow .pgc-ring-b,
+svg.has-shadow .pgc-star-paths {
+    filter: drop-shadow(0 0 3px rgba(var(--pgc-warm-rgb), .7)) drop-shadow(0 0 3px rgba(var(--pgc-deep-rgb), .7));
+}
 
- /* Pure CSS star draw + shimmer animation (no JS) - refined to match previous JS timing */
- #starPaths .star-seg {
-     stroke-dasharray: 1000;
-     stroke-dashoffset: 1000;
-     opacity: 1;
-     /* total cycle ~4.6s to emulate previous JS timing */
-     animation: starCycle calc(2s / var(--pgc-speed-multiplier)) cubic-bezier(.2, 1, .2, 1) infinite;
-     animation-fill-mode: both;
- }
 
- @keyframes starCycle {
-     0% {
-         stroke-dashoffset: 1000;
-     }
+.rot-slow {
+    animation: spin calc(50s / var(--pgc-speed-multiplier)) linear infinite;
+    transform-box: fill-box;
+    transform-origin: center
+}
 
-     22% {
-         stroke-dashoffset: 0;
-     }
+.rot-mid {
+    animation: spin calc(27s / var(--pgc-speed-multiplier)) linear infinite reverse;
+    transform-box: fill-box;
+    transform-origin: center
+}
 
-     90% {
-         stroke-dashoffset: 0;
-     }
+.rot-fast {
+    animation: spin calc(6.5s / var(--pgc-speed-multiplier)) linear infinite;
+    transform-box: fill-box;
+    transform-origin: center
+}
 
-     100% {
-         stroke-dashoffset: 1000;
-     }
- }
+@keyframes spin {
+    from {
+        transform: rotate(0deg)
+    }
 
- /* staggered delays so segments draw in order (matches previous stagger) */
- #starPaths .star-seg:nth-child(1) {
-     animation-delay: 0s;
- }
+    to {
+        transform: rotate(360deg)
+    }
+}
 
- #starPaths .star-seg:nth-child(2) {
-     animation-delay: 0.14s;
- }
+/* .breath{animation:breath 2200ms ease-in-out infinite} */
+/* @keyframes breath{0%{transform:scale(0.997)}50%{transform:scale(1.003)}100%{transform:scale(0.997)}} */
+/* allow strokes to scale so the whole artwork scales evenly */
+/* polygon, circle, path{vector-effect:non-scaling-stroke} */
 
- #starPaths .star-seg:nth-child(3) {
-     animation-delay: 0.28s;
- }
+/* Pure CSS star draw + shimmer animation (no JS) - refined to match previous JS timing */
+#starPaths .star-seg {
+    stroke-dasharray: 1000;
+    opacity: 1;
+    /* total cycle ~4.6s to emulate previous JS timing */
 
- #starPaths .star-seg:nth-child(4) {
-     animation-delay: 0.42s;
- }
+}
 
- #starPaths .star-seg:nth-child(5) {
-     animation-delay: 0.56s;
- }
+#starPaths.star-seg-anim .star-seg {
+    animation: starCycle calc(2s / var(--pgc-speed-multiplier)) cubic-bezier(.2, 1, .2, 1) infinite;
+    animation-fill-mode: both;
+    stroke-dashoffset: 1000;
+}
 
- #starPaths .star-seg:nth-child(6) {
-     animation-delay: 0.70s;
- }
+@keyframes starCycle {
+    0% {
+        stroke-dashoffset: 1000;
+    }
 
- #starPaths .star-seg:nth-child(7) {
-     animation-delay: 0.84s;
- }
+    22% {
+        stroke-dashoffset: 0;
+    }
 
- #starPaths .star-seg:nth-child(8) {
-     animation-delay: 0.98s;
- }
+    90% {
+        stroke-dashoffset: 0;
+    }
 
- #starPaths {
-     mix-blend-mode: screen
- }
+    100% {
+        stroke-dashoffset: 1000;
+    }
+}
+
+/* staggered delays so segments draw in order (matches previous stagger) */
+#starPaths .star-seg:nth-child(1) {
+    animation-delay: 0s;
+}
+
+#starPaths .star-seg:nth-child(2) {
+    animation-delay: 0.14s;
+}
+
+#starPaths .star-seg:nth-child(3) {
+    animation-delay: 0.28s;
+}
+
+#starPaths .star-seg:nth-child(4) {
+    animation-delay: 0.42s;
+}
+
+#starPaths .star-seg:nth-child(5) {
+    animation-delay: 0.56s;
+}
+
+#starPaths .star-seg:nth-child(6) {
+    animation-delay: 0.70s;
+}
+
+#starPaths .star-seg:nth-child(7) {
+    animation-delay: 0.84s;
+}
+
+#starPaths .star-seg:nth-child(8) {
+    animation-delay: 0.98s;
+}
+
+#starPaths {
+    mix-blend-mode: screen
+}
