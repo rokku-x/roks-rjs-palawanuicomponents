@@ -4,7 +4,9 @@ import dts from 'vite-plugin-dts'
 
 export default defineConfig({
     plugins: [
-        react(),
+        react({
+            jsxRuntime: 'classic' // Use classic JSX runtime for libraries
+        }),
         dts({
             include: ['src/**/*'],
             exclude: ['src/main.tsx'],
@@ -23,11 +25,12 @@ export default defineConfig({
             }
         },
         rollupOptions: {
-            external: ['react', 'react-dom'],
+            external: ['react', 'react-dom', 'react/jsx-runtime'],
             output: {
                 globals: {
                     react: 'React',
-                    'react-dom': 'ReactDOM'
+                    'react-dom': 'ReactDOM',
+                    'react/jsx-runtime': 'react/jsx-runtime'
                 }
             }
         }
