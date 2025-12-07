@@ -1,6 +1,6 @@
 {
   "name": "roks-rjs-palawanuicomponents",
-  "version": "0.1.7",
+  "version": "0.1.8",
   "description": "A React component library",
   "repository": {
     "type": "git",
@@ -15,14 +15,70 @@
       "import": "./dist/index.esm.js",
       "require": "./dist/index.js"
     },
-    "./style.css": "./dist/roks-rjs-palawanuicomponents.css"
+    "./style.css": "./dist/roks-rjs-palawanuicomponents.css",
+    "./PalawanPayLogo": {
+      "types": "./dist/PalawanPayLogo/index.d.ts",
+      "import": "./dist/PalawanPayLogo/index.esm.js",
+      "require": "./dist/PalawanPayLogo/index.js"
+    },
+    "./PalawanPayLogo.svg": "./src/components/PalawanPayLogo/index.svg",
+    "./PalawanPayLogo.png": "./src/components/PalawanPayLogo/index.png",
+    "./PGCLogo": {
+      "types": "./dist/PGCLogo/index.d.ts",
+      "import": "./dist/PGCLogo/index.esm.js",
+      "require": "./dist/PGCLogo/index.js"
+    },
+    "./PGCLogo.svg": "./src/components/PGCLogo/index.svg",
+    "./PGCLogo.png": "./src/components/PGCLogo/index.png",
+    "./PEPPLogo": {
+      "types": "./dist/PEPPLogo/index.d.ts",
+      "import": "./dist/PEPPLogo/index.esm.js",
+      "require": "./dist/PEPPLogo/index.js"
+    },
+    "./PEPPLogo.svg": "./src/components/PEPPLogo/index.svg",
+    "./PEPPLogo.png": "./src/components/PEPPLogo/index.png",
+    "./PPSLogo": {
+      "types": "./dist/PPSLogo/index.d.ts",
+      "import": "./dist/PPSLogo/index.esm.js",
+      "require": "./dist/PPSLogo/index.js"
+    },
+    "./PPSLogo.svg": "./src/components/PPSLogo/index.svg",
+    "./PPSLogo.png": "./src/components/PPSLogo/index.png",
+    "./PPSPEPPLogo": {
+      "types": "./dist/PPSPEPPLogo/index.d.ts",
+      "import": "./dist/PPSPEPPLogo/index.esm.js",
+      "require": "./dist/PPSPEPPLogo/index.js"
+    },
+    "./PPSPEPPLogo.jpg": "./src/components/PPSPEPPLogo/index.jpg",
+    "./PPSPEPPPPayLogo": {
+      "types": "./dist/PPSPEPPPPayLogo/index.d.ts",
+      "import": "./dist/PPSPEPPPPayLogo/index.esm.js",
+      "require": "./dist/PPSPEPPPPayLogo/index.js"
+    },
+    "./PPSPEPPPPayLogo.jpg": "./src/components/PPSPEPPPPayLogo/index.jpg",
+    "./PPayText": {
+      "types": "./dist/PPayText/index.d.ts",
+      "import": "./dist/PPayText/index.esm.js",
+      "require": "./dist/PPayText/index.js"
+    },
+    "./PPayText.svg": "./src/components/PPayText/index.svg",
+    "./PPayText.png": "./src/components/PPayText/index.png",
+    "./PalawanLoading": {
+      "types": "./dist/PalawanLoading/index.d.ts",
+      "import": "./dist/PalawanLoading/index.esm.js",
+      "require": "./dist/PalawanLoading/index.js"
+    }
   },
   "sideEffects": false,
   "files": [
-    "dist"
+    "dist",
+    "src/components/**/*.svg",
+    "src/components/**/*.jpg",
+    "src/components/**/*.png"
   ],
   "scripts": {
     "build": "vite build",
+    "generate:png": "node ./scripts/svg-to-png.js",
     "dev": "vite",
     "preview": "vite preview",
     "test": "vitest",
@@ -46,7 +102,8 @@
     "typescript": "^5.0.0",
     "vite": "^7.1.9",
     "vite-plugin-dts": "^4.5.4",
-    "vitest": "^4.0.15"
+    "vitest": "^4.0.15",
+    "sharp": "^0.32.0"
   },
   "keywords": [
     "react",

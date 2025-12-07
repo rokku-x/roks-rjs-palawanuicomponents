@@ -2,10 +2,12 @@ import React, { useState } from 'react'
 import ReactDOM from 'react-dom/client'
 import './index.css'
 import PalawanLoading from './components/PalawanLoading'
+import PPayText from './components/PPayText';
+import PPPEPPPPayLogo from './components/PPSPEPPPPayLogo';
 
 function App() {
 
-    const [size, setSize] = useState<number>(200);
+    const [size, setSize] = useState<number>(100);
     const [isGreen, setIsGreen] = useState<boolean>(false);
     const [speed, setSpeed] = useState<number>(1);
     const [glow, setGlow] = useState<boolean>(true);
@@ -13,7 +15,6 @@ function App() {
     const [spin, setSpin] = useState<boolean>(true);
     const [starAnim, setStarAnim] = useState<boolean>(true);
     const [useRawCircleElements, setUseRawCircleElements] = useState<boolean>(false);
-
 
     return (
         <div className="flex min-h-screen flex-col items-center justify-center gap-8 bg-zinc-50 font-sans px-4">
@@ -25,9 +26,9 @@ function App() {
                     </label>
                     <input
                         type="range"
-                        min={100}
-                        max={1200}
-                        step={50}
+                        min={10}
+                        max={2000}
+                        step={10}
                         value={size}
                         onChange={(e) => setSize(Number(e.target.value))}
                         className="w-full cursor-pointer"
@@ -95,6 +96,9 @@ function App() {
 
             <div className="mt-8">
                 <PalawanLoading size={size} isGreen={isGreen} speed={speed} hasGlow={glow} hasShadow={shadow} stopSpin={!spin} stopStarAnim={!starAnim} useRawCircleElements={useRawCircleElements} />
+            </div>
+            <div className="mt-8">
+                <PPPEPPPPayLogo height={size} />
             </div>
         </div>
     )
