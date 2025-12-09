@@ -1,0 +1,149 @@
+import LogoProps from "../../types/LogoPropsDefault";
+
+interface PalawanPayLogoProps extends LogoProps, CustomStyle {
+}
+
+interface CustomStyle {
+    greenShade?: string;
+    goldShade?: string;
+    subGoldShade?: string;
+    blocksShade?: string;
+    outlineShade?: string;
+    maskOverlapping?: boolean;
+}
+
+export const PalawanPayLogoWhiteProps: PalawanPayLogoProps = {
+    greenShade: "#FFFFFF",
+    goldShade: "#fff0",
+    subGoldShade: "#ffffffff",
+    blocksShade: "#fff0",
+    outlineShade: "#FFFFFF",
+    maskOverlapping: true
+
+};
+
+export const PalawanPayLogoBlackProps: PalawanPayLogoProps = {
+    greenShade: "#000000",
+    goldShade: "#fff0",
+    subGoldShade: "#000000ff",
+    blocksShade: "#fff0",
+    outlineShade: "#000000",
+    maskOverlapping: true
+};
+
+export const PalawanPayLogoDefaultProps: PalawanPayLogoProps = {
+    greenShade: "#31713C",
+    goldShade: "#E7C612",
+    subGoldShade: "#E5B002",
+    blocksShade: "#0003",
+    outlineShade: "#E7C612",
+    maskOverlapping: false
+}
+
+export default function PalawanPayLogo(props: PalawanPayLogoProps) {
+    let { id, className, style, height, greenShade, goldShade, subGoldShade, blocksShade, outlineShade, maskOverlapping } = { ...PalawanPayLogoDefaultProps, ...(props.variant === undefined ? PalawanPayLogoDefaultProps : (props.variant === 1 ? PalawanPayLogoBlackProps : (props.variant === 2 ? PalawanPayLogoWhiteProps : {}))), ...props };
+    return (
+        <svg className={className} id={id} version="1.1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 2681 2134" height={height}
+            style={{ display: 'block', ...style }} preserveAspectRatio="xMidYMid meet" >
+            <defs>
+                <path id="p-green-shape"
+                    d="M0,0 L823,0 L870,3 L918,8 L947,12 L994,21 L1034,31 L1072,43 L1096,52 L1124,64 L1154,79 L1181,95 L1197,106 L1211,116 L1227,129 L1241,141 L1248,147 L1248,149 L1252,151 L1269,168 L1276,176 L1285,186 L1294,197 L1308,216 L1320,234 L1328,247 L1340,269 L1348,286 L1358,310 L1369,343 L1376,369 L1384,410 L1388,443 L1389,457 L1389,551 L1386,587 L1381,620 L1374,659 L1365,698 L1354,735 L1342,769 L1331,796 L1318,825 L1305,851 L1295,869 L1283,889 L1272,906 L1262,921 L1255,931 L1241,950 L1230,964 L1221,975 L1211,986 L1204,994 L1195,1004 L1160,1039 L1152,1046 L1144,1053 L1142,1053 L1141,1056 L1131,1064 L1115,1077 L1103,1086 L1091,1095 L1075,1106 L1060,1116 L1041,1128 L1017,1142 L1001,1151 L966,1169 L942,1180 L918,1190 L889,1201 L859,1211 L829,1220 L784,1231 L737,1240 L676,1248 L643,1251 L609,1253 L256,1253 L255,1265 L245,1321 L233,1389 L225,1433 L215,1489 L205,1545 L195,1601 L184,1662 L172,1730 L164,1775 L154,1831 L145,1881 L136,1930 L132,1953 L131,1955 L-345,1955 L-344,1942 L-330,1862 L-320,1806 L-314,1772 L-305,1721 L-295,1664 L-282,1591 L-274,1546 L-266,1500 L-260,1466 L-248,1398 L-238,1341 L-229,1291 L-223,1257 L-214,1206 L-204,1149 L-191,1076 L-178,1002 L-170,958 L-164,923 L-154,866 L-143,804 L-133,747 L-123,691 L-113,634 L-104,583 L-87,487 L-79,443 L-73,408 L-62,345 L-50,278 L-42,232 L-33,181 L-16,85 L-3,11 Z "
+                    transform="translate(1123, 169)" />
+
+                <circle id="circleA-shape" cx="1737" cy="771" r="333" />
+                <circle id="circleB-shape" cx="1737" cy="771" r="291" />
+
+                <mask id="mask-p-green">
+                    <use href="#p-green-shape" fill="white" />
+                    <use href="#circleA-shape" fill="black" />
+                </mask>
+
+                <mask id="mask-circleA">
+                    <use href="#circleA-shape" fill="white" />
+                    <use href="#circleB-shape" fill="black" />
+                </mask>
+
+                <mask id="mask-circleB">
+                    <use href="#circleB-shape" fill="white" />
+                    <g transform="translate(1737, 771)" fill="black">
+                        <rect x="-11" y="-291" width="22" height="44" />
+                        <rect x="-11" y="-291" width="22" height="44" transform="rotate(15)" />
+                        <rect x="-11" y="-291" width="22" height="44" transform="rotate(30)" />
+                        <rect x="-11" y="-291" width="22" height="44" transform="rotate(45)" />
+                        <rect x="-11" y="-291" width="22" height="44" transform="rotate(60)" />
+                        <rect x="-11" y="-291" width="22" height="44" transform="rotate(75)" />
+                        <rect x="-11" y="-291" width="22" height="44" transform="rotate(90)" />
+                        <rect x="-11" y="-291" width="22" height="44" transform="rotate(105)" />
+                        <rect x="-11" y="-291" width="22" height="44" transform="rotate(120)" />
+                        <rect x="-11" y="-291" width="22" height="44" transform="rotate(135)" />
+                        <rect x="-11" y="-291" width="22" height="44" transform="rotate(150)" />
+                        <rect x="-11" y="-291" width="22" height="44" transform="rotate(165)" />
+                        <rect x="-11" y="-291" width="22" height="44" transform="rotate(180)" />
+                        <rect x="-11" y="-291" width="22" height="44" transform="rotate(195)" />
+                        <rect x="-11" y="-291" width="22" height="44" transform="rotate(210)" />
+                        <rect x="-11" y="-291" width="22" height="44" transform="rotate(225)" />
+                        <rect x="-11" y="-291" width="22" height="44" transform="rotate(240)" />
+                        <rect x="-11" y="-291" width="22" height="44" transform="rotate(255)" />
+                        <rect x="-11" y="-291" width="22" height="44" transform="rotate(270)" />
+                        <rect x="-11" y="-291" width="22" height="44" transform="rotate(285)" />
+                        <rect x="-11" y="-291" width="22" height="44" transform="rotate(300)" />
+                        <rect x="-11" y="-291" width="22" height="44" transform="rotate(315)" />
+                        <rect x="-11" y="-291" width="22" height="44" transform="rotate(330)" />
+                        <rect x="-11" y="-291" width="22" height="44" transform="rotate(345)" />
+                    </g>
+                </mask>
+            </defs>
+
+            <use id="p-char" href="#p-green-shape" mask={maskOverlapping ? "url(#mask-p-green)" : ""} fill={greenShade} />
+            <path id="p-outline"
+                d="M0,0 L1896,0 L1946,3 L2008,9 L2065,18 L2103,26 L2128,32 L2164,42 L2200,54 L2226,64 L2248,73 L2266,81 L2282,89 L2310,104 L2325,113 L2344,125 L2363,138 L2379,150 L2393,161 L2406,172 L2418,183 L2426,190 L2436,200 L2444,207 L2451,215 L2461,225 L2468,233 L2477,243 L2488,257 L2499,271 L2511,288 L2518,298 L2529,316 L2537,329 L2549,351 L2557,367 L2566,387 L2576,411 L2586,439 L2594,466 L2598,482 L2606,515 L2613,559 L2616,583 L2618,619 L2618,707 L2616,745 L2611,784 L2604,828 L2595,872 L2587,903 L2582,920 L2575,944 L2568,963 L2563,978 L2557,994 L2547,1018 L2532,1051 L2515,1085 L2505,1103 L2497,1117 L2484,1138 L2476,1151 L2469,1161 L2456,1180 L2442,1199 L2429,1216 L2421,1226 L2412,1237 L2400,1250 L2393,1258 L2384,1268 L2368,1285 L2349,1304 L2341,1311 L2332,1320 L2324,1327 L2310,1339 L2302,1346 L2293,1353 L2275,1367 L2262,1377 L2248,1387 L2232,1398 L2214,1410 L2203,1417 L2183,1429 L2168,1438 L2144,1451 L2132,1458 L2115,1466 L2099,1474 L2073,1486 L2041,1499 L2012,1510 L1979,1521 L1949,1530 L1911,1540 L1871,1549 L1813,1559 L1754,1566 L1722,1569 L1682,1571 L1480,1572 L1460,1573 L1452,1618 L1445,1657 L1436,1707 L1431,1735 L1422,1786 L1416,1819 L1410,1853 L1405,1881 L1396,1931 L1391,1959 L1385,1993 L1375,2049 L1366,2098 L1363,2114 L1282,2114 L1283,2103 L1292,2052 L1297,2024 L1307,1968 L1316,1919 L1322,1884 L1331,1833 L1339,1788 L1347,1745 L1352,1716 L1359,1677 L1367,1633 L1372,1604 L1379,1565 L1387,1521 L1391,1497 L1393,1492 L1632,1491 L1681,1490 L1726,1487 L1777,1482 L1817,1476 L1852,1470 L1893,1461 L1941,1448 L1970,1439 L1998,1429 L2026,1418 L2053,1406 L2089,1389 L2111,1377 L2133,1365 L2158,1350 L2178,1337 L2196,1325 L2210,1315 L2229,1301 L2244,1289 L2255,1280 L2266,1271 L2278,1260 L2286,1253 L2299,1241 L2322,1218 L2329,1210 L2340,1198 L2347,1190 L2353,1182 L2355,1182 L2357,1178 L2365,1168 L2380,1148 L2390,1134 L2399,1121 L2409,1106 L2420,1088 L2432,1068 L2442,1050 L2460,1015 L2472,988 L2481,967 L2486,953 L2492,937 L2499,916 L2506,893 L2512,871 L2519,841 L2523,821 L2531,776 L2536,727 L2538,693 L2539,661 L2537,613 L2532,562 L2527,533 L2519,497 L2508,460 L2499,435 L2492,419 L2479,391 L2465,365 L2459,355 L2446,335 L2434,318 L2423,304 L2414,293 L2405,283 L2398,275 L2384,260 L2377,253 L2369,246 L2358,236 L2350,229 L2341,222 L2328,212 L2317,204 L2302,194 L2283,182 L2269,174 L2253,165 L2237,157 L2206,143 L2183,134 L2162,126 L2142,120 L2121,114 L2091,106 L2042,96 L1977,87 L1940, 84 L1906,82 L1880,81 L1825,80 L-14,79 L-13,69 L-8,41 L-2,7 Z "
+                transform="translate(53, 10)" fill={outlineShade} />
+
+            <use id="circleA" href="#circleA-shape" mask={maskOverlapping ? "url(#mask-circleA)" : ""} fill={goldShade} />
+
+            <use id="circleB" href="#circleB-shape" mask={maskOverlapping ? "url(#mask-circleB)" : ""} fill={subGoldShade} />
+
+            <g id="wifi">
+                <circle id="wifi-dot" cx="909" cy="291" r="123" fill={greenShade} />
+
+                <path id="wifi-s"
+                    d="M0,0 L132,0 L132,9 L129,34 L128,47 L128,86 L131,116 L135,140 L143,169 L151,191 L159,209 L169,228 L179,244 L191,261 L200,272 L214,287 L226,299 L237,308 L254,321 L273,333 L300,347 L311,352 L335,361 L364,369 L400,375 L444,379 L442,393 L435,432 L426,482 L421,509 L420,511 L397,511 L367,509 L327,503 L300,497 L270,488 L243,478 L218,467 L196,455 L176,443 L156,429 L142,418 L128,406 L112,391 L101,380 L101,378 L97,376 L88,365 L78,353 L69,341 L53,317 L40,294 L32,278 L24,260 L14,233 L5,203 L-1,174 L-5,151 L-7,131 L-8,114 L-8,66 L-6,36 L-1,3 Z "
+                    transform="translate(538, 170)" fill={greenShade} />
+                <path id="wifi-m"
+                    d="M0,0 L133,0 L130,21 L126,55 L125,69 L124,115 L125,154 L128,187 L133,217 L139,247 L149,282 L160,313 L171,339 L180,358 L192,380 L202,397 L214,415 L224,429 L233,441 L241,451 L241,453 L244,454 L253,465 L268,481 L282,495 L290,502 L300,511 L315,523 L334,537 L360,554 L379,565 L406,579 L425,588 L461,602 L489,611 L529,621 L570,628 L595,631 L649,634 L654,635 L653,644 L641,712 L633,755 L631,765 L630,766 L580,766 L545,763 L505,757 L478,752 L437,742 L396,729 L372,720 L348,710 L330,702 L311,692 L289,680 L276,672 L256,659 L239,647 L227,638 L213,627 L202,618 L194,611 L190,608 L190,606 L186,604 L175,593 L167,586 L160,579 L153,571 L146,564 L139,556 L127,542 L119,532 L110,520 L101,508 L91,493 L78,473 L65,450 L50,421 L39,397 L26,364 L14,327 L6,297 L-3,254 L-8,217 L-11,187 L-12,171 L-12,100 L-9,61 L-3,13 Z "
+                    transform="translate(282, 170)" fill={greenShade} />
+
+                <path id="wifi-l"
+                    d="M0,0 L132,0 L132,8 L127,43 L122,86 L120,126 L119,158 L121,212 L124,246 L130,290 L137,326 L143,352 L153,388 L165,424 L173,445 L184,471 L201,506 L214,531 L220,541 L234,564 L246,582 L258,599 L268,612 L278,625 L287,636 L296,646 L305,657 L318,670 L324,677 L329,682 L345,697 L358,709 L369,718 L382,729 L399,742 L417,755 L447,775 L469,788 L485,797 L514,812 L544,826 L564,834 L582,841 L599,847 L630,857 L672,868 L705,875 L756,883 L796,887 L864,890 L864,897 L849,980 L842,1019 L840,1023 L811,1023 L770,1021 L724,1017 L688,1012 L643,1004 L600,994 L565,984 L536,975 L506,964 L474,951 L448,939 L423,927 L395,912 L368,896 L351,885 L340,878 L326,868 L312,858 L294,844 L280,833 L266,821 L256,812 L248,805 L236,794 L201,759 L194,751 L183,739 L174,728 L160,711 L153,702 L144,690 L132,673 L114,646 L104,630 L90,606 L77,582 L60,547 L46,514 L37,490 L28,465 L18,433 L10,404 L-1,354 L-10,297 L-14,253 L-16,216 L-16,146 L-13,94 L-9,55 L-2,8 Z "
+                    transform="translate(26, 170)" fill={greenShade} />
+            </g>
+
+            <g id="block-group" transform="translate(1737, 771)">
+                <rect x="-11" y="-291" width="22" height="44" fill={blocksShade} />
+                <rect x="-11" y="-291" width="22" height="44" transform="rotate(15)" fill={blocksShade} />
+                <rect x="-11" y="-291" width="22" height="44" transform="rotate(30)" fill={blocksShade} />
+                <rect x="-11" y="-291" width="22" height="44" transform="rotate(45)" fill={blocksShade} />
+                <rect x="-11" y="-291" width="22" height="44" transform="rotate(60)" fill={blocksShade} />
+                <rect x="-11" y="-291" width="22" height="44" transform="rotate(75)" fill={blocksShade} />
+                <rect x="-11" y="-291" width="22" height="44" transform="rotate(90)" fill={blocksShade} />
+                <rect x="-11" y="-291" width="22" height="44" transform="rotate(105)" fill={blocksShade} />
+                <rect x="-11" y="-291" width="22" height="44" transform="rotate(120)" fill={blocksShade} />
+                <rect x="-11" y="-291" width="22" height="44" transform="rotate(135)" fill={blocksShade} />
+                <rect x="-11" y="-291" width="22" height="44" transform="rotate(150)" fill={blocksShade} />
+                <rect x="-11" y="-291" width="22" height="44" transform="rotate(165)" fill={blocksShade} />
+                <rect x="-11" y="-291" width="22" height="44" transform="rotate(180)" fill={blocksShade} />
+                <rect x="-11" y="-291" width="22" height="44" transform="rotate(195)" fill={blocksShade} />
+                <rect x="-11" y="-291" width="22" height="44" transform="rotate(210)" fill={blocksShade} />
+                <rect x="-11" y="-291" width="22" height="44" transform="rotate(225)" fill={blocksShade} />
+                <rect x="-11" y="-291" width="22" height="44" transform="rotate(240)" fill={blocksShade} />
+                <rect x="-11" y="-291" width="22" height="44" transform="rotate(255)" fill={blocksShade} />
+                <rect x="-11" y="-291" width="22" height="44" transform="rotate(270)" fill={blocksShade} />
+                <rect x="-11" y="-291" width="22" height="44" transform="rotate(285)" fill={blocksShade} />
+                <rect x="-11" y="-291" width="22" height="44" transform="rotate(300)" fill={blocksShade} />
+                <rect x="-11" y="-291" width="22" height="44" transform="rotate(315)" fill={blocksShade} />
+                <rect x="-11" y="-291" width="22" height="44" transform="rotate(330)" fill={blocksShade} />
+                <rect x="-11" y="-291" width="22" height="44" transform="rotate(345)" fill={blocksShade} />
+            </g>
+        </svg>
+    )
+}
