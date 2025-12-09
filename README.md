@@ -30,36 +30,34 @@ npm run build
 
 ## CLI: render-logo
 
-This project provides a small CLI to render logo components to SVG and PNG from the TSX components.
+This project provides a small CLI to render logo components to PNG from the TSX components.
 
 - Script: `scripts/render-logo.js`
 - Npm script: `npm run render:logo -- <ComponentName> [flags]`
 - When the package is published, the bin is exposed as `render-logo` and can be run via `npx`.
 
 Default behavior
-- If `--out` is not provided, outputs are written to `./logoOutput/` in the current working directory. The PNG will be `logoOutput/<ComponentName>.png` and the SVG (if written) will be `logoOutput/<ComponentName>.svg`.
+- If `--out` is not provided, outputs are written to `./logoOutput/` in the current working directory. The PNG will be `logoOutput/<ComponentName>.png`.
 
 Flags
-- `--out <file>`: Output file (PNG or SVG). If extension is `.svg` the script writes SVG and skips rasterizing.
-- `--svg-out <file>`: Write rendered SVG to this path.
-- `--write-svg`: Derive an SVG path from `--out` and write the SVG too.
+- `--out <file>`: Output file (PNG). If you pass a path ending in `.svg` it will be converted to `.png` automatically.
 - `--height <n>` / `--width <n>`: Size passed to the component and to the rasterizer.
 - `--prop key=value`: Single prop to pass to the component (coerces numbers and booleans).
 - `--props '{"key":value,...}'`: JSON props object.
 
 Examples
 
-1) Render PNG + SVG into `logoOutput` (defaults):
+1) Render PNG into `logoOutput` (default):
 
 ```bash
-node ./scripts/render-logo.js PalawanPayLogo --height 1000 --write-svg
-# writes logoOutput/PalawanPayLogo.png and logoOutput/PalawanPayLogo.svg
+node ./scripts/render-logo.js PalawanPayLogo --height 1000 --out logoOutput/PalawanPayLogo.png
+# writes logoOutput/PalawanPayLogo.png
 ```
 
-2) Explicit paths:
+2) Explicit path example:
 
 ```bash
-node ./scripts/render-logo.js PEPPLogo --height 800 --out logoOutput/PEPPLogo.png --svg-out logoOutput/PEPPLogo.svg
+node ./scripts/render-logo.js PEPPLogo --height 800 --out logoOutput/PEPPLogo.png
 ```
 
 3) Multiple props via JSON:
@@ -71,18 +69,67 @@ node ./scripts/render-logo.js PEPPLogo --props '{"height":800,"maskOverlapping":
 4) Use npm script (pass args after `--`):
 
 ```bash
-npm run render:logo -- PalawanPayLogo --height 1000 --prop greenShade=#00ff00 --write-svg
+npm run render:logo -- PalawanPayLogo --height 1000 --prop greenShade=#00ff00
 ```
 
 5) Test npx locally (from repo root):
 
 ```bash
-npx . PalawanPayLogo --height 200 --write-svg
+npx . render-logo PalawanPayLogo --height 200
 ```
 
 Notes
 - The script uses `esbuild-register` to import TSX components at runtime; install dev dependencies before running locally (`npm install`).
 - When published, `npx roks-rjs-palawanuicomponents render-logo ...` will be available.
+ - The script uses `esbuild-register` to import TSX components at runtime; install dev dependencies before running locally (`npm install`).
+ - When published, `npx roks-rjs-palawanuicomponents render-logo ...` will be available.
+
+Note about PNG / `sharp` when using `npx`
+ - The CLI uses `sharp` to rasterize SVG -> PNG. When running via `npx` (remote package), devDependencies like `sharp` are not installed by default, so you may see "Cannot find module 'sharp'".
+ - Workarounds:
+  1. Install `sharp` locally and run the CLI from the project or globally: `npm install --save sharp` then run the command.
+  2. Use `npx` to pull `sharp` on-the-fly with the `-p` flag: 
+    ```bash
+    npx -p sharp -p roks-rjs-palawanuicomponents -- render-logo PalawanPayLogo --height 1000 --out logo.png
+    ```
+    This temporarily installs `sharp` into the runner environment so PNG output works.
+  3. If you prefer not to install `sharp`, instruct the CLI to write SVG only (it will fall back to writing an SVG file instead of a PNG):
+    ```bash
+    npx . PalawanPayLogo --out logoOutput/PalawanPayLogo.svg
+    ```
+
+Quick npx commands (copy-paste)
+
+- Run the CLI from the local repository (no publish required):
+
+```bash
+# from the repo root
+npx . render-logo PalawanPayLogo --height 200 --write-svg
+# or directly with node
+node ./scripts/render-logo.js PalawanPayLogo --height 200 --write-svg
+```
+
+- Run the published package via npx and pull `sharp` on-the-fly so PNGs work:
+
+```bash
+npx -p sharp -p roks-rjs-palawanuicomponents -- render-logo PalawanPayLogo --height 1000 --out logo.png
+```
+
+- Run the GitHub repo directly (no publish) and pull `sharp` on-the-fly:
+
+```bash
+npx -p sharp -p github:rokku-x/roks-rjs-palawanuicomponents -- render-logo PalawanPayLogo --height 1000 --out logo.png
+```
+
+- Remote npx (without `sharp`) — write SVG only (PNG will be skipped):
+
+```bash
+npx roks-rjs-palawanuicomponents PalawanPayLogo --height 200 --out logoOutput/PalawanPayLogo.svg
+```
+
+Notes:
+- Published `npx` users who want PNG output without passing `-p sharp` will need `sharp` in the package `dependencies` (currently it is a `devDependency` in this repo).
+- For quick local testing, `npx .` is the simplest approach.
 
 ## Library Components
 
