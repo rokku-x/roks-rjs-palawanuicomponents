@@ -1,15 +1,15 @@
+import LogoProps from "../../types/LogoPropsDefault";
 
-interface PalawanPayLogoProps {
-    width?: number;
-    height?: number | string;
+interface PalawanPayLogoProps extends LogoProps, CustomStyle {
+}
+
+interface CustomStyle {
     greenShade?: string;
     goldShade?: string;
     subGoldShade?: string;
     blocksShade?: string;
     outlineShade?: string;
     maskOverlapping?: boolean;
-    className?: string;
-    style?: React.CSSProperties;
 }
 
 export const PalawanPayLogoWhiteProps: PalawanPayLogoProps = {
@@ -31,9 +31,19 @@ export const PalawanPayLogoBlackProps: PalawanPayLogoProps = {
     maskOverlapping: true
 };
 
-export default function PalawanPayLogo({ className, style, height, greenShade = "#31713C", goldShade = "#E7C612", subGoldShade = "#E5B002", blocksShade = "#0003", outlineShade = "#E7C612", maskOverlapping = false }: PalawanPayLogoProps) {
+export const PalawanPayLogoDefaultProps: PalawanPayLogoProps = {
+    greenShade: "#31713C",
+    goldShade: "#E7C612",
+    subGoldShade: "#E5B002",
+    blocksShade: "#0003",
+    outlineShade: "#E7C612",
+    maskOverlapping: false
+}
+
+export default function PalawanPayLogo(props: PalawanPayLogoProps) {
+    let { id, className, style, height, greenShade, goldShade, subGoldShade, blocksShade, outlineShade, maskOverlapping } = { ...PalawanPayLogoDefaultProps, ...(props.variant === undefined ? PalawanPayLogoDefaultProps : (props.variant === 1 ? PalawanPayLogoBlackProps : (props.variant === 2 ? PalawanPayLogoWhiteProps : {}))), ...props };
     return (
-        <svg className={className} id="svg" version="1.1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 2681 2134" height={height}
+        <svg className={className} id={id} version="1.1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 2681 2134" height={height}
             style={{ display: 'block', ...style }} preserveAspectRatio="xMidYMid meet" >
             <defs>
                 <path id="p-green-shape"

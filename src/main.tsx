@@ -2,8 +2,8 @@ import React, { useState } from 'react'
 import ReactDOM from 'react-dom/client'
 import './index.css'
 import PalawanLoading from './components/PalawanLoading'
-import PPayText from './components/PPayText';
 import PPPEPPPPayLogo from './components/PPSPEPPPPayLogo';
+import PalawanPayLogo, { PalawanPayLogoBlackProps, PalawanPayLogoWhiteProps } from './components/PalawanPayLogo';
 
 function App() {
 
@@ -99,6 +99,12 @@ function App() {
             </div>
             <div className="mt-8">
                 <PPPEPPPPayLogo height={size} />
+
+            </div>
+
+            <div className='bg-green-900'>
+                <PalawanPayLogo height={size} {...PalawanPayLogoBlackProps} />
+                <PalawanPayLogo height={size} {...PalawanPayLogoWhiteProps} />
             </div>
         </div>
     )
