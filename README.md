@@ -83,6 +83,55 @@ npx . PalawanPayLogo --height 200 --write-svg
 Notes
 - The script uses `esbuild-register` to import TSX components at runtime; install dev dependencies before running locally (`npm install`).
 - When published, `npx roks-rjs-palawanuicomponents render-logo ...` will be available.
+ - The script uses `esbuild-register` to import TSX components at runtime; install dev dependencies before running locally (`npm install`).
+ - When published, `npx roks-rjs-palawanuicomponents render-logo ...` will be available.
+
+Note about PNG / `sharp` when using `npx`
+ - The CLI uses `sharp` to rasterize SVG -> PNG. When running via `npx` (remote package), devDependencies like `sharp` are not installed by default, so you may see "Cannot find module 'sharp'".
+ - Workarounds:
+  1. Install `sharp` locally and run the CLI from the project or globally: `npm install --save sharp` then run the command.
+  2. Use `npx` to pull `sharp` on-the-fly with the `-p` flag: 
+    ```bash
+    npx -p sharp -p roks-rjs-palawanuicomponents -- render-logo PalawanPayLogo --height 1000 --out logo.png
+    ```
+    This temporarily installs `sharp` into the runner environment so PNG output works.
+  3. If you prefer not to install `sharp`, instruct the CLI to write SVG only (it will fall back to writing an SVG file instead of a PNG):
+    ```bash
+    npx . PalawanPayLogo --out logoOutput/PalawanPayLogo.svg
+    ```
+
+Quick npx commands (copy-paste)
+
+- Run the CLI from the local repository (no publish required):
+
+```bash
+# from the repo root
+npx . render-logo PalawanPayLogo --height 200 --write-svg
+# or directly with node
+node ./scripts/render-logo.js PalawanPayLogo --height 200 --write-svg
+```
+
+- Run the published package via npx and pull `sharp` on-the-fly so PNGs work:
+
+```bash
+npx -p sharp -p roks-rjs-palawanuicomponents -- render-logo PalawanPayLogo --height 1000 --out logo.png
+```
+
+- Run the GitHub repo directly (no publish) and pull `sharp` on-the-fly:
+
+```bash
+npx -p sharp -p github:rokku-x/roks-rjs-palawanuicomponents -- render-logo PalawanPayLogo --height 1000 --out logo.png
+```
+
+- Remote npx (without `sharp`) — write SVG only (PNG will be skipped):
+
+```bash
+npx roks-rjs-palawanuicomponents PalawanPayLogo --height 200 --out logoOutput/PalawanPayLogo.svg
+```
+
+Notes:
+- Published `npx` users who want PNG output without passing `-p sharp` will need `sharp` in the package `dependencies` (currently it is a `devDependency` in this repo).
+- For quick local testing, `npx .` is the simplest approach.
 
 ## Library Components
 

@@ -10,7 +10,8 @@
   "module": "dist/index.esm.js",
   "types": "dist/index.es.d.ts",
   "bin": {
-    "render-logo": "scripts/render-logo.js"
+    "render-logo": "scripts/render-logo.js",
+    "roks-rjs-palawanuicomponents": "scripts/render-logo.js"
   },
   "exports": {
     ".": {

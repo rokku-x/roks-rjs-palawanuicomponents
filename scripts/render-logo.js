@@ -1,7 +1,12 @@
 #!/usr/bin/env node
 const path = require('path');
 const fs = require('fs');
-const sharp = require('sharp');
+let sharp;
+try {
+    sharp = require('sharp');
+} catch (err) {
+    sharp = null;
+}
 
 // Minimal CLI parsing
 const argv = process.argv.slice(2);
@@ -161,6 +166,27 @@ try {
             await fs.promises.writeFile(out, svgString, 'utf8');
             console.log('Wrote', out);
             return;
+        }
+
+        // If sharp is not available, fall back to writing SVG and show guidance for npx users
+        if (!sharp) {
+            // determine fallback svg path
+            const svgFallback = svgOut || (() => {
+                const parsed = path.parse(out);
+                return path.join(parsed.dir, `${parsed.name}.svg`);
+            })();
+
+            try {
+                await fs.promises.writeFile(svgFallback, svgString, 'utf8');
+                console.warn('`sharp` module not found — skipped PNG rasterization.');
+                console.warn('To produce PNG via npx, run: `npx -p sharp roks-rjs-palawanuicomponents render-logo', componentName, '--out', out, '`');
+                console.warn('Or run locally in a project with `npm install --save sharp` and then re-run the command.');
+                console.log('Wrote SVG fallback to', svgFallback);
+                return;
+            } catch (werr) {
+                console.error('Failed to write SVG fallback:', werr);
+                process.exit(1);
+            }
         }
 
         let img = sharp(Buffer.from(svgString));
