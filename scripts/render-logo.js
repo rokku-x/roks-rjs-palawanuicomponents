@@ -21,8 +21,7 @@ let out = null;
 let height = null;
 let width = null;
 let props = {};
-let svgOut = null;
-let writeSvg = false;
+// SVG output removed: CLI will only produce rasterized PNG output.
 
 for (let i = 1; i < argv.length; i++) {
     const a = argv[i];
@@ -61,12 +60,10 @@ for (let i = 1; i < argv.length; i++) {
         props[k] = v;
         continue;
     }
-    if (a === '--svg-out') {
-        svgOut = argv[++i];
-        continue;
-    }
-    if (a === '--write-svg') {
-        writeSvg = true;
+    // Note: SVG-generation flags removed; ignore `--svg-out` and `--write-svg` if provided
+    if (a === '--svg-out' || a === '--write-svg') {
+        // skip the next arg for --svg-out
+        if (a === '--svg-out') i++;
         continue;
     }
 }
@@ -85,17 +82,7 @@ if (!out) {
 // Ensure output dir exists
 fs.mkdirSync(path.dirname(out), { recursive: true });
 
-// If svgOut requested and not absolute, resolve relative to cwd
-if (svgOut && !path.isAbsolute(svgOut)) svgOut = path.join(process.cwd(), svgOut);
-
-// If writeSvg is true and svgOut not provided, derive from out by replacing extension with .svg
-if (writeSvg && !svgOut) {
-    const parsed = path.parse(out);
-    svgOut = path.join(parsed.dir, `${parsed.name}.svg`);
-}
-
-// Ensure svgOut dir exists if requested
-if (svgOut) fs.mkdirSync(path.dirname(svgOut), { recursive: true });
+// Ensure output dir exists
 
 // Register esbuild to allow require() of TSX
 require('esbuild-register/dist/node').register({
@@ -147,25 +134,14 @@ try {
 
 // Use sharp to rasterize
 (async () => {
-    // If svgOut requested, write the SVG string to disk
-    if (svgOut) {
-        try {
-            await fs.promises.writeFile(svgOut, svgString, 'utf8');
-            console.log('Wrote', svgOut);
-        } catch (err) {
-            console.error('Failed to write SVG file:', err);
-            process.exit(1);
-        }
-    }
-
     try {
-        // If the output requested is an SVG (out ends with .svg) and no PNG is desired, skip rasterize
+        // Always rasterize to PNG. If user provided an .svg path, convert extension to .png and warn.
         const outExt = path.extname(out || '').toLowerCase();
         if (outExt === '.svg') {
-            // write svg to out
-            await fs.promises.writeFile(out, svgString, 'utf8');
-            console.log('Wrote', out);
-            return;
+            const parsed = path.parse(out);
+            const newOut = path.join(parsed.dir, `${parsed.name}.png`);
+            console.warn('SVG output is no longer produced; changing output to', newOut);
+            out = newOut;
         }
 
         // If sharp is not available, fall back to writing SVG and show guidance for npx users
