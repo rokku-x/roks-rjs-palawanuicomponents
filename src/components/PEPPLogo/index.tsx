@@ -1,16 +1,14 @@
+import LogoProps from "../../types/LogoPropsDefault";
 
-interface PalawanPayLogoProps {
-    height?: number;
-    className?: string;
-    style?: React.CSSProperties;
+interface PalawanPayLogoProps extends LogoProps {
 }
 
 
-export default function PEPPLLogo({ className, style, height }: PalawanPayLogoProps) {
+export default function PEPPLLogo({ id, className, style, height }: PalawanPayLogoProps) {
     return (
         <svg
             className={className}
-            id="svg"
+            id={id}
             version="1.1"
             xmlns="http://www.w3.org/2000/svg"
             viewBox="0 0 6830 2271"
