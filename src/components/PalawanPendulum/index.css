@@ -1,0 +1,83 @@
+.pendulum-wrapper {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    perspective: 800px;
+}
+
+.pendulum-hanger {
+    width: 200px;
+    height: 220px;
+    position: relative;
+    transform-origin: top center;
+    animation: swing 2.5s ease-in-out infinite;
+    display: flex;
+    align-items: flex-start;
+    justify-content: center;
+}
+
+.pendulum-arm {
+    width: 6px;
+    height: 140px;
+    background: linear-gradient(180deg, rgba(158, 0, 0, 0) 0%, rgba(158, 0, 0, 0.12) 8%, rgba(158, 0, 0, 0.25) 18%, rgb(158, 0, 0) 45%);
+    position: absolute;
+    top: 0;
+}
+
+.pendulum-arm.left {
+    left: 44%;
+    transform: translateX(-50%);
+    transform-origin: top center;
+}
+
+.pendulum-arm.center {
+    left: 50%;
+    background: linear-gradient(180deg, rgba(214, 196, 0, 0) 0%, rgba(214, 196, 0, 0.12) 8%, rgba(248, 198, 0, 0.3) 18%, rgb(240, 184, 0) 70%);
+    transform: translateX(-50%);
+    transform-origin: top center;
+}
+
+.pendulum-arm.right {
+    left: 56%;
+    transform: translateX(-50%);
+    transform-origin: top center;
+}
+
+.pendulum-bob {
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+    top: 138px;
+    /* attach where longer arms end */
+    transform-origin: top center;
+}
+
+@keyframes swing {
+    0% {
+        transform: rotateZ(-25deg);
+    }
+
+    50% {
+        transform: rotateZ(25deg);
+    }
+
+    100% {
+        transform: rotateZ(-25deg);
+    }
+}
+
+.pendulum-fast {
+    animation-duration: 1s;
+}
+
+.pendulum-slow {
+    animation-duration: 3.5s;
+}
+
+.pendulum-small {
+    transform: scale(0.6);
+}
+
+.pendulum-large {
+    transform: scale(1.25);
+}

@@ -1,21 +1,31 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import ReactDOM from 'react-dom/client'
 import './index.css'
 import PalawanLoading from './components/PalawanLoading'
 import PPPEPPPPayLogo from './components/PPSPEPPPPayLogo';
 import PalawanPayLogo, { PalawanPayLogoBlackProps, PalawanPayLogoWhiteProps } from './components/PalawanPayLogo';
+import { LoadingProvider, AnimationType, useLoading } from '@rokku-x/roks-rjsc/loading'
+import PalawanPendulum from './components/PalawanPendulum';
 
 function App() {
 
     const [size, setSize] = useState<number>(100);
-    const [isGreen, setIsGreen] = useState<boolean>(false);
+    const [isGreen, setIsGreen] = useState<boolean>(true);
     const [speed, setSpeed] = useState<number>(1);
     const [glow, setGlow] = useState<boolean>(true);
     const [shadow, setShadow] = useState<boolean>(true);
     const [spin, setSpin] = useState<boolean>(true);
     const [starAnim, setStarAnim] = useState<boolean>(true);
     const [useRawCircleElements, setUseRawCircleElements] = useState<boolean>(false);
+    const { startLoading, stopLoading, isLoading } = useLoading();
 
+    useEffect(() => {
+        startLoading();
+        const timer = setTimeout(() => {
+            stopLoading();
+        }, 3000);
+        return () => clearTimeout(timer);
+    }, [useRawCircleElements]);
     return (
         <div className="flex min-h-screen flex-col items-center justify-center gap-8 bg-zinc-50 font-sans px-4">
             <div className="mt-8">
@@ -96,6 +106,11 @@ function App() {
 
             <div className="mt-8">
                 <PalawanLoading size={size} isGreen={isGreen} speed={speed} hasGlow={glow} hasShadow={shadow} stopSpin={!spin} stopStarAnim={!starAnim} useRawCircleElements={useRawCircleElements} />
+
+
+            </div>
+            <div className="mt-8" style={{ display: isLoading ? 'none' : 'block' }} >
+                <PalawanPendulum size={size} isGreen={isGreen} speed={speed} hasGlow={glow} hasShadow={shadow} stopSpin={!spin} stopStarAnim={!starAnim} useRawCircleElements={useRawCircleElements} />
             </div>
             <div className="mt-8">
                 <PPPEPPPPayLogo height={size} />
@@ -112,8 +127,10 @@ function App() {
 
 ReactDOM.createRoot(document.getElementById('root')!).render(
     <React.StrictMode>
+        <LoadingProvider loadingComponent={<PalawanPendulum />} animationType={AnimationType.None} animationDuration={1} >
+            <App />
+        </LoadingProvider>
         {/* <LoadingProvider wrapperStyle={{ backdropFilter: 'blur(3px)' }} animationType={AnimationType.Spin} animationDuration={1} > */}
-        <App />
         {/* </LoadingProvider> */}
-    </React.StrictMode>,
+    </React.StrictMode >,
 )

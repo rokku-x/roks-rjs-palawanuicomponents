@@ -112,16 +112,9 @@ svg.has-shadow .pgc-star-paths {
     }
 }
 
-/* .breath{animation:breath 2200ms ease-in-out infinite} */
-/* @keyframes breath{0%{transform:scale(0.997)}50%{transform:scale(1.003)}100%{transform:scale(0.997)}} */
-/* allow strokes to scale so the whole artwork scales evenly */
-/* polygon, circle, path{vector-effect:non-scaling-stroke} */
-
-/* Pure CSS star draw + shimmer animation (no JS) - refined to match previous JS timing */
 #starPaths .star-seg {
     stroke-dasharray: 1000;
     opacity: 1;
-    /* total cycle ~4.6s to emulate previous JS timing */
 
 }
 
