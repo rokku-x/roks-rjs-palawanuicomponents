@@ -155,7 +155,7 @@ try {
             try {
                 await fs.promises.writeFile(svgFallback, svgString, 'utf8');
                 console.warn('`sharp` module not found — skipped PNG rasterization.');
-                console.warn('To produce PNG via npx, run: `npx -p sharp roks-rjs-palawanuicomponents render-logo', componentName, '--out', out, '`');
+                console.warn('To produce PNG via npx, run: `npx -p sharp @rokku-x/roks-rjs-palawanuicomponents render-logo', componentName, '--out', out, '`');
                 console.warn('Or run locally in a project with `npm install --save sharp` and then re-run the command.');
                 console.log('Wrote SVG fallback to', svgFallback);
                 return;

@@ -9,13 +9,13 @@ A React component library for Palawan UI needs
 
 ## Installation
 
-npm install roks-rjs-palawanuicomponents
+npm install @rokku-x/roks-rjs-palawanuicomponents
 
 ## Usage
 
 ```tsx
-import { PalawanLoading } from 'roks-rjs-palawanuicomponents';
-import 'roks-rjs-palawanuicomponents/style.css';
+import { PalawanLoading } from '@rokku-x/roks-rjs-palawanuicomponents';
+import '@rokku-x/roks-rjs-palawanuicomponents/style.css';
 
 function App() {
   return <PalawanLoading />;
@@ -47,7 +47,7 @@ Flags
 
 Notes
 - The CLI uses `esbuild-register` to import TSX components at runtime and `sharp` to rasterize to PNG. For local development, run `npm install` to ensure dependencies are available.
-- The package now includes the runtime dependencies (`esbuild-register`, `react`, `react-dom`, and `sharp`) so after publishing, `npx roks-rjs-palawanuicomponents render-logo ...` will work without needing extra `-p` flags in most environments.
+- The package now includes the runtime dependencies (`esbuild-register`, `react`, `react-dom`, and `sharp`) so after publishing, `npx @rokku-x/roks-rjs-palawanuicomponents render-logo ...` will work without needing extra `-p` flags in most environments.
 - If you run the GitHub repo directly via `npx github:...`, npx may install packages into a temporary environment; if you hit missing-module errors, re-run with explicit `-p` flags to include `esbuild-register` and `sharp`:
   ```bash
   npx -p esbuild-register -p sharp -p github:rokku-x/roks-rjs-palawanuicomponents -- render-logo PalawanPayLogo --height 1000 --out logo.png
@@ -68,9 +68,9 @@ npx . render-logo PalawanPayLogo --height 200
 
 Notes
 - The script uses `esbuild-register` to import TSX components at runtime; install dev dependencies before running locally (`npm install`).
-- When published, `npx roks-rjs-palawanuicomponents render-logo ...` will be available.
+- When published, `npx @rokku-x/roks-rjs-palawanuicomponents render-logo ...` will be available.
  - The script uses `esbuild-register` to import TSX components at runtime; install dev dependencies before running locally (`npm install`).
- - When published, `npx roks-rjs-palawanuicomponents render-logo ...` will be available.
+ - When published, `npx @rokku-x/roks-rjs-palawanuicomponents render-logo ...` will be available.
 
 Note about PNG / `sharp` when using `npx`
  - The CLI uses `sharp` to rasterize SVG -> PNG. When running via `npx` (remote package), devDependencies like `sharp` are not installed by default, so you may see "Cannot find module 'sharp'".
@@ -78,7 +78,7 @@ Note about PNG / `sharp` when using `npx`
   1. Install `sharp` locally and run the CLI from the project or globally: `npm install --save sharp` then run the command.
   2. Use `npx` to pull `sharp` on-the-fly with the `-p` flag: 
     ```bash
-    npx -p sharp -p roks-rjs-palawanuicomponents -- render-logo PalawanPayLogo --height 1000 --out logo.png
+    npx -p sharp -p @rokku-x/roks-rjs-palawanuicomponents -- render-logo PalawanPayLogo --height 1000 --out logo.png
     ```
     This temporarily installs `sharp` into the runner environment so PNG output works.
   3. If you prefer not to install `sharp`, instruct the CLI to write SVG only (it will fall back to writing an SVG file instead of a PNG):
@@ -100,7 +100,7 @@ node ./scripts/render-logo.js PalawanPayLogo --height 200
 - Run the published package via npx (after publishing):
 
 ```bash
-npx roks-rjs-palawanuicomponents render-logo PalawanPayLogo --height 1000 --out logo.png
+npx @rokku-x/roks-rjs-palawanuicomponents render-logo PalawanPayLogo --height 1000 --out logo.png
 ```
 
 - Run the GitHub repo directly (no publish) and include runtime deps if needed:
@@ -134,6 +134,7 @@ Available components
 - `PPSPEPPLogo` — PPS-PEPP composite logo. Accepts `height` / `width`.
 - `PPSPEPPPPayLogo` — PPS-PEPP pay variant. Accepts `height` / `width`.
 - `PalawanLoading` — small loading spinner component. Accepts `height` / `width`.
+ - `PalawanPendulum` — pendulum wrapper around `PalawanLoading`. Accepts the same props as `PalawanLoading`.
 
 - `PalawanLoading` — animated loading spinner with configurable styling and animation controls.
   - Props (all optional):
@@ -159,7 +160,7 @@ Available components
   - Example usage
 
   ```tsx
-  import PalawanLoading from 'roks-rjs-palawanuicomponents/PalawanLoading';
+  import PalawanLoading from '@rokku-x/roks-rjs-palawanuicomponents/PalawanLoading';
 
   // basic
   <PalawanLoading size={120} />
@@ -174,8 +175,8 @@ Available components
 Import examples
 
 ```tsx
-import PalawanPayLogo from 'roks-rjs-palawanuicomponents/PalawanPayLogo';
-import PEPPLogo from 'roks-rjs-palawanuicomponents/PEPPLogo';
+import PalawanPayLogo from '@rokku-x/roks-rjs-palawanuicomponents/PalawanPayLogo';
+import PEPPLogo from '@rokku-x/roks-rjs-palawanuicomponents/PEPPLogo';
 
 function Example() {
   return (
